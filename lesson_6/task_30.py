@@ -10,6 +10,6 @@ start = int(input('Введите 1-ый элемент арифметическ
 step = int(input('Введите разность элементов: '))
 length = int(input('Введите сколько будет элементов: '))
 
-for i in range(1, length + 1):
-  print(start + (i - 1) * step, end=' ')
+for i in range(length):
+  print(start + i * step, end=' ')
 
