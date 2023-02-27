@@ -47,8 +47,7 @@ def save(phone_book):  # 1 - сохранить в удаленном храни
 
 def load():  # 2 - загрузить данные из удаленного хранилища
     os.system('cls||clear')
-    with open('phone_book.json', 'r', encoding='utf-8') as pb:
-        pb_local = json.load(pb)
+    with open('phone_book.json', 'r', encoding='utf-8') as pb: pb_local = json.load(pb)
     print('\nТелефонная книга из удаленного хранилища успешно загружена\n')
     return pb_local
 
@@ -75,10 +74,9 @@ def print_phones_contact():  # 4 - вывести по ФИО телефоны
     f_name = pb_local.get(input("Введите ФИО для поиска всех телефонов: ").lower().strip(), None)
     if f_name != None:
         for k, v in f_name.items():
-            if (k == 'mobilephone' or k == 'workphone') and type(v) == list:
+            if (k == 'mobilephone' or k == 'workphone'):
                 for i in range(len(v)):
                     print(k, v[i], sep=' ', end='\n')
-            elif k == 'mobilephone' or k == 'workphone': print(k, v, sep=' ', end='\n')
     else: print('\nТакого контакта нет')
     print()
 
@@ -134,16 +132,11 @@ def edit_contact():  # 8 - редактировать телефонную кн�
         dict_res = {}
         print('\nСписок данных доступных для изменения: ')
         for k, v in pb_local[f_name].items():
-            if type(v) == list:
-                if v == []:
-                    dict_res[count] = [k, v]
-                    print(count, k, v)
-                    count += 1
-                else:
-                    for i in v:
-                        dict_res[count] = [k, i]
-                        print(count, k, i)
-                        count += 1
+            if len(v) > 0:
+                for i in v:
+                    dict_res[count] = [k, i]
+                    print(count, k, i)
+                    count += 1         
             else:
                 dict_res[count] = [k, v]
                 print(count, k, v)
